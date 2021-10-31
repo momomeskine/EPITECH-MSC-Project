@@ -1,0 +1,56 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: $PG_USER
+      POSTGRES_PASSWORD: $PG_PASSWORD
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped 
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: $PGADMIN_MAIL
+      PGADMIN_DEFAULT_PASSWORD: $PGADMIN_PASSWORD
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+       - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+  api: 
+    build:
+      context: ./timeManagerAPI
+    volumes : 
+        - ./timeManagerAPI:/api
+    environment:
+      PG_USER: $PG_USER
+      PG_PASSWORD: $PG_PASSWORD
+      PG_URL: $PG_URL
+    ports:
+      - "4000:4000" 
+    depends_on: 
+      - postgres
+  front:
+    build:
+      context: front
+      dockerfile: Dockerfile
+    volumes:
+      - ./front:/var/www/vuejs
+      - /var/www/vuejs/node_modules
+    ports:
+      - "8099:8080"
+    container_name: front
+    depends_on: 
+      - api
+
+volumes:
+    postgres:
+    pgadmin:
