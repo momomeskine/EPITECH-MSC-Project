@@ -11,6 +11,6 @@ RUN mix local.hex --force
 RUN mix local.rebar --force
 RUN mix deps.get
 COPY ./entrypoint.sh /
-RUN chmod +x /entrypoint.sh
+RUN chmod 777 /entrypoint.sh
 #RUNTIME Commands
 CMD [ "./entrypoint.sh" ]

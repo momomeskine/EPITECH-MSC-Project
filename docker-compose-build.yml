@@ -26,7 +26,8 @@ services:
       - "5050:80"
     restart: unless-stopped
   api: 
-    image: mohamedmeskine/timemanagerapi:latest
+    build:
+      context: ./timeManagerAPI
     volumes : 
         - ./timeManagerAPI:/api
     environment:
@@ -38,7 +39,9 @@ services:
     depends_on: 
       - postgres
   front:
-    image: mohamedmeskine/timemanagerfront:latest
+    build:
+      context: front
+      dockerfile: Dockerfile
     volumes:
       - ./front:/var/www/vuejs
       - /var/www/vuejs/node_modules
