@@ -9,7 +9,7 @@ env:
 before_install:
 - export PATH=$PATH:$HOME/.local/bin
 script:
-- docker build -t $DOCKER_REPO .
+- docker build -t $DOCKER_REPO ./timeManagerAPI
 deploy:
   provider: script
   script: bash docker_push.sh
