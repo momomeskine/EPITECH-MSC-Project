@@ -1,0 +1,56 @@
+@import 'fonts';
+@import 'variables';
+@import 'modern-normalize';
+
+html {
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --p: hsl(259, 94.4%, 51.2%);
+  --pf: hsl(259, 94.3%, 41%);
+  --pc: hsl(0, 0%, 100%);
+  --a: hsl(174, 60%, 51%);
+  --af: hsl(174, 59.8%, 41%);
+  --ac: hsl(0, 0%, 100%);
+  --n: hsl(219, 14.1%, 27.8%);
+  --nf: hsl(222, 13.4%, 19%);
+  --nc: hsl(0, 0%, 100%);
+  --b1: hsl(0, 0%, 100%);
+  --b2: hsl(210, 20%, 98%);
+  --b3: hsl(216, 12.2%, 83.9%);
+  --bc: hsl(0, 0%, 6%);
+  --info: hsl(207, 89.8%, 53.9%);
+  --success: hsl(174, 100%, 29%);
+  --warning: hsl(36, 100%, 50%);
+  --error: hsl(14, 100%, 57.1%);
+  --rounded-btn: 2px;
+  --rounded-box: 2px;
+  --border-btn: 1px;
+  --animation-btn: 0.25s;
+  --btn-focus-scale: 0.95;
+  --btn-text-case: uppercase;
+  /*
+  --border-color: var(--b3);
+  --rounded-badge: 1.9rem;
+  --animation-input: 0.2s;
+  --navbar-padding: 0.5rem;
+  --tab-border: 1px;
+  --tab-radius: 0.5rem;
+  */
+}

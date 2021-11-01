@@ -9,12 +9,12 @@ import Vue from 'vue'
 const requireComponent = require.context('./layouts', true, /[a-z0-9]+\.(jsx?|vue)$/i)
 
 // For each matching file name...
-requireComponent.keys().forEach(fileName => {
-    const componentConfig = requireComponent(fileName)
-    const componentName = fileName
-        .substr(fileName.lastIndexOf('/') + 1)
-        // Remove the file extension from the end
-        .replace(/\.\w+$/, '')
-    // Globally register the component
-    Vue.component(componentName + 'Layout', componentConfig.default || componentConfig)
+requireComponent.keys().forEach((fileName) => {
+  const componentConfig = requireComponent(fileName)
+  const componentName = fileName
+    .substr(fileName.lastIndexOf('/') + 1)
+    // Remove the file extension from the end
+    .replace(/\.\w+$/, '')
+  // Globally register the component
+  Vue.component(componentName + 'Layout', componentConfig.default || componentConfig)
 })

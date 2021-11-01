@@ -1,0 +1,75 @@
+$--p: var(--p);
+$--pf: var(--pf);
+$--pc: var(--pc);
+$--a: var(--a);
+$--af: var(--af);
+$--ac: var(--ac);
+$--n: var(--n);
+$--nf: var(--nf);
+$--nc: var(--nc);
+$--b1: var(--b1);
+$--b2: var(--b2);
+$--b3: var(--b3);
+$--bc: var(--bc);
+$--in: var(--info);
+$--su: var(--success);
+$--wa: var(--warning);
+$--er: var(--error);
+
+$--r-btn: var(--rounded-btn, 0.5rem);
+$--r-box: var(--rounded-box, 0.5rem);
+$--b-btn: var(--border-btn, 1px);
+$--animation-btn: var(--animation-btn, 0.25s);
+$--btn-focus-scale: var(--btn-focus-scale, 0.95);
+$--btn-text-case: var(--btn-text-case, uppercase);
+
+// Typography
+%font-sm {
+  font-family: 'kanit';
+  font-weight: 300;
+}
+
+%font-md {
+  font-family: 'kanit';
+  font-weight: 400;
+}
+
+%font-lg {
+  font-family: 'kanit';
+  font-weight: 500;
+}
+// $font-size-base: 0.9rem;
+// $line-height-base: 1.6;
+
+// Break points
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-xxl: 1536px;
+
+@mixin for-sm {
+  @media (min-width: $bp-sm) {
+    @content;
+  }
+}
+@mixin for-md {
+  @media (min-width: $bp-md) {
+    @content;
+  }
+}
+@mixin for-lg {
+  @media (min-width: $bp-lg) {
+    @content;
+  }
+}
+@mixin for-xl {
+  @media (min-width: $bp-xl) {
+    @content;
+  }
+}
+@mixin for-xxl {
+  @media (min-width: $bp-xxl) {
+    @content;
+  }
+}

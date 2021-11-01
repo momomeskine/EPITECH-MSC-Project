@@ -1,21 +1,20 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     meta: { layout: 'WithSideBar' },
     component: require('@/views/Home.vue').default,
   },
   {
-    path: "/about",
-    name: "About",
+    path: '/about',
+    name: 'About',
     meta: { layout: 'WithSideBar', needAuth: true },
-    component: () =>
-      import(/* webpackChunkName: "about" */ "@/views/About.vue"),
+    component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
   },
   {
     path: '/login',
@@ -32,7 +31,7 @@ const routes = [
     name: 'NotFound',
     component: require('@/views/NotFound.vue').default,
   },
-];
+]
 
 const router = new VueRouter({
   mode: 'hash',
@@ -54,4 +53,4 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-export default router;
+export default router

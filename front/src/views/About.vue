@@ -1,5 +1,14 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="about" id="main-container">
+    <IconTest />
   </div>
 </template>
+
+<script>
+export default {
+  name: 'About',
+  components: {
+    IconTest: () => import('@/components/IconTest.vue'),
+  },
+}
+</script>
