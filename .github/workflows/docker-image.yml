@@ -25,7 +25,7 @@ jobs:
         id: docker_build_timemanagerapi
         uses: docker/build-push-action@v2
         with:
-          context: ./timeManagerAPI
+          context: ${{ GITHUB_WORKSPACE }}/timeManagerAPI
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/timemanagerapi:latest
@@ -37,7 +37,7 @@ jobs:
         id: docker_build_front
         uses: docker/build-push-action@v2
         with:
-          context: ./front
+          context: ${{ GITHUB_WORKSPACE }}/front
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/timemanagerfront:latest
