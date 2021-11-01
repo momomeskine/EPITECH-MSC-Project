@@ -33,19 +33,12 @@ jobs:
 
       - name: Image digest timemanagerapi
         run: echo ${{ steps.docker_build.outputs.digest }}
-      
-      - name: Check Out Repo front
-        uses: actions/checkout@v2
-        with:
-          repository: EPITECH-MSC-Project/front
-          path: front
           
       - name: Build and push front
         id: docker_build_front
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./front/Dockerfile
+          context: ./front
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/timemanagerfront:latest
 
