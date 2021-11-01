@@ -8,10 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-      - name: Check Out Repo 
+      - name: Check Out Repo API
         uses: actions/checkout@v2
         with:
-          path: main
+          repository: EPITECH-MSC-Project/timeManagerAPI
+          path: timeManagerAPI
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
@@ -29,7 +30,7 @@ jobs:
         id: docker_build_timemanagerapi
         uses: docker/build-push-action@v2
         with:
-          context: ./timeManagerAPI
+          context: .
           file: ./timeManagerAPI/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/timemanagerapi:latest
@@ -37,12 +38,18 @@ jobs:
       - name: Image digest timemanagerapi
         run: echo ${{ steps.docker_build.outputs.digest }}
       
+      - name: Check Out Repo front
+        uses: actions/checkout@v2
+        with:
+          repository: EPITECH-MSC-Project/front
+          path: front
+          
       - name: Build and push front
         id: docker_build_front
         uses: docker/build-push-action@v2
         with:
-          context: front
-          file: front/Dockerfile
+          context: .
+          file: ./front/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/timemanagerfront:latest
 
