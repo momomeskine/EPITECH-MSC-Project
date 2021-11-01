@@ -4,7 +4,7 @@ on:
     branches: [ main ]
     
 jobs:
-  build:
+ build__push_API:
     runs-on: ubuntu-latest
     steps:
     
@@ -33,7 +33,14 @@ jobs:
 
       - name: Image digest timemanagerapi
         run: echo ${{ steps.docker_build.outputs.digest }}
-          
+
+ build_push_Front:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check Out Repo API
+        uses: actions/checkout@v2
+
       - name: Build and push front
         id: docker_build_front
         uses: docker/build-push-action@v2
