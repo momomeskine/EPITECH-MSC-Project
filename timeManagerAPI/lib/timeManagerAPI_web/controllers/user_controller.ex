@@ -29,7 +29,7 @@ defmodule TimeManagerAPIWeb.UserController do
     emailSearch = Map.get(params, "email", "")
     usernameSearch = Map.get(params, "username", "")
     cond do
-      emailSearch != "" && usernameSearch != "" -> render(conn, "index.json", user: Accounts.search_user!(usernameSearch, emailSearch))
+      emailSearch != "" && usernameSearch != "" -> render(conn, "show.json", user: Accounts.search_user!(usernameSearch, emailSearch))
       true -> render(conn, "index.json", users: Accounts.list_users())
     end
   end
