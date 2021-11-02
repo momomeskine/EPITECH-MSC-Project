@@ -39,9 +39,9 @@ defmodule TimeManagerAPIWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
-  plug CORSPlug, origin: ["http://localhost:8080"]
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug CORSPlug
   plug TimeManagerAPIWeb.Router
 end
