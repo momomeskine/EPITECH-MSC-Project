@@ -2,24 +2,25 @@
 
 #### Time management application
 
-## 💾 Install elixir
+## 💾 Install TimeManager
 
-`iex -v`
-
-*cf : https://elixir-lang.org/install.html*
 
 #### 📡 Add deps
 We will need to install the Hex, the Elixir package manager as well, this could be done by running : `mix local.hex`
 
 Installing Phoenix : `mix archive.install hex phx_new 1.5.13`
 
-*To create a new project : `mix phx.new server --no-webpack --no-html --no-gettext --no-dashboard --binary-id --no-live`*
-
 Download deps : `mix deps.get`
 
 Install new dep : modify the `mix.exs` file
 
-### 🛠 Build
+You'll need to install npm & run npm install in front folder.
+
+After that you can run the docker-compose with the following command : `docker-compose up` If you prefer to build directly docker, you can just run `docker-compose -f docker-compose-build.yml up --build`
+
+### 🛠 Troubleshooting
+
+In Docker-compose all file are mounted for live-developpement. So be careful to get all dependencies on your host before running containers. If you just want to run them, remove volumes mounted in api & front services in `docker-compose.yml`
 
 #### For linux 🐧
 `???`
