@@ -2,8 +2,10 @@ defmodule TimeManagerAPIWeb.Router do
   use TimeManagerAPIWeb, :router
 
   pipeline :api do
+    plug CORSPlug, origin: "http://localhost:8080"
     plug :accepts, ["json"]
   end
+
 
   scope "/api", TimeManagerAPIWeb do
     pipe_through :api

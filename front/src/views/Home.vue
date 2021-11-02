@@ -55,7 +55,7 @@ export default {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 2rem;
+    padding: 0 2rem 2rem 2rem;
     overflow: auto;
     scrollbar-width: thin;
     scroll-behavior: smooth;

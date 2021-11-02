@@ -23,6 +23,7 @@ export default {
         { title: 'About', path: { name: 'About' }, icon: ['far', 'user'] },
         { title: 'Sign Up', path: { name: 'SignUp' }, icon: ['far', 'hourglass'] },
         { title: 'Sign In', path: { name: 'SignIn' }, icon: ['far', 'hourglass'] },
+        { title: 'Test API', path: { name: 'TestAPI' }, icon: ['far', 'lemon'] },
       ],
     }
   },

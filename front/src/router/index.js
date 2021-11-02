@@ -27,6 +27,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "auth" */ '@/views/SignUp.vue'),
   },
   {
+    path: '/testapi',
+    name: 'TestAPI',
+    meta: { layout: 'WithSideBar' },
+    component: () => import(/* webpackChunkName: "testapi" */ '@/views/TestAPI.vue'),
+  },
+  {
     path: '/:catchAll(.*)',
     name: 'NotFound',
     component: require('@/views/NotFound.vue').default,

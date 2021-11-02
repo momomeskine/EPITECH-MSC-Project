@@ -5,7 +5,7 @@ ENV CONTAINER_PATH /var/www/vuejs
 WORKDIR $CONTAINER_PATH
 
 COPY package*.json ./
-RUN npm install --save font-awesome
+RUN npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons @fortawesome/vue-fontawesome chart.js
 RUN npm install
 
 COPY . .

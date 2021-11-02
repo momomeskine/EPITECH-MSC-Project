@@ -46,8 +46,11 @@ class ApiServer {
     return this.instance.post(`/users`, { user: { email, username } })
   }
 
-  updateUser(email, username) {
-    return this.instance.put(`/users`, { user: { email, username } })
+  /**
+   * @param {{ email?: string, username?: string }} user
+   */
+  updateUser(user) {
+    return this.instance.put(`/users`, { user: { ...user } })
   }
 
   deleteUser(id) {
