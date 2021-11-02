@@ -44,9 +44,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./front:/var/www/vuejs
-      - /var/www/vuejs/node_modules
     ports:
-      - "8099:8080"
+      - "8080:8080"
     container_name: front
     depends_on: 
       - api
