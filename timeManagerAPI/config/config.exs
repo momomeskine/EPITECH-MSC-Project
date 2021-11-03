@@ -24,6 +24,9 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :timeManagerAPI, TimeManagerAPIWeb.Auth.Guardian,
+  issuer: "timeManagerAPI",
+  secret_key: "nnsWdh8ddLrWgtP4EwxBjQSmLAJT3hV4SjY+UJYtN2GQL3kzQJrHYJJ2CZNVyeq4"
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

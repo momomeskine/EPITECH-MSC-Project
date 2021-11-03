@@ -13,8 +13,10 @@ defmodule TimeManagerAPIWeb.Router do
       get "/", UserController, :search
       get "/:userID", UserController, :show
       post "/", UserController, :create
+      post "/signin", UserController, :signin
       put "/:userID", UserController, :update
       delete "/:userID", UserController, :delete
+      
     end
 
     scope "/clocks" do

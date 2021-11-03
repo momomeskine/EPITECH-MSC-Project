@@ -3,6 +3,7 @@ defmodule TimeManagerAPIWeb.UserController do
 
   alias TimeManagerAPI.Accounts
   alias TimeManagerAPI.Accounts.User
+  alias TimeManagerAPIWeb.Auth.Guardian
 
   action_fallback TimeManagerAPIWeb.FallbackController
 
@@ -12,11 +13,12 @@ defmodule TimeManagerAPIWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
+    with {:ok, %User{} = user} <- Accounts.create_user(user_params),
+    {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.user_path(conn, :show, user))
-      |> render("show.json", user: user)
+      |> render("user.json", %{user: user, token: token})
     end
   end
 
@@ -41,6 +43,14 @@ defmodule TimeManagerAPIWeb.UserController do
       render(conn, "show.json", user: user)
     end
   end
+
+def signin(conn, %{"email" => email, "password" => password}) do
+  with {:ok, user, token} <- Guardian.authenticate(email, password) do
+    conn
+    |> put_status(:created)
+    |> render("user.json", %{user: user, token: token})
+  end
+end
 
   def delete(conn, %{"userID" => id}) do
     user = Accounts.get_user!(id)

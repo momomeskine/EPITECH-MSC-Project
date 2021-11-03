@@ -35,6 +35,14 @@ defmodule TimeManagerAPI.Accounts do
       ** (Ecto.NoResultsError)
 
   """
+  def get_by_email(email) do
+  case Repo.get_by(User, email: email) do
+    nil ->
+      {:error, :not_found}
+    user ->
+      {:ok, user}
+  end
+end
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc false

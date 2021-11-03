@@ -21,4 +21,9 @@ defmodule TimeManagerAPIWeb.FallbackController do
     |> put_view(TimeManagerAPIWeb.ErrorView)
     |> render(:"404")
   end
+  def call(conn, {:error, :unauthorized}) do
+  conn
+  |> put_status(:unauthorized)
+  |> render(TimeManagerAPIWeb.ErrorView, :"401")
+end
 end

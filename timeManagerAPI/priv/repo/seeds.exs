@@ -13,11 +13,11 @@
 alias TimeManagerAPI.Repo
 alias TimeManagerAPI.Accounts.User
 
-user1 = Repo.insert! %User{email: "user1@gmail.com", username: "user1"}
+user1 = Repo.insert! %User{email: "user1@gmail.com", username: "user1", password: "testpassword"}
 
-Repo.insert! %User{email: "user2@test.com", username: "user2"}
+Repo.insert! %User{email: "user2@test.com", username: "user2", password: "testpassword"}
 
-Repo.insert! %User{email: "user3@wanadoo.fr", username: "user3"}
+Repo.insert! %User{email: "user3@wanadoo.fr", username: "user3", password: "testpassword"}
 
 alias TimeManagerAPI.Clocks.Clock
 
