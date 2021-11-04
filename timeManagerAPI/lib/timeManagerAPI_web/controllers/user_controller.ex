@@ -69,11 +69,12 @@ defmodule TimeManagerAPIWeb.UserController do
     case Comeonin.Bcrypt.check_pass(Accounts.get_by_email(email), password) do
       {:ok, user} ->
         expiry = DateTime.add(DateTime.utc_now(), 3600 * 24, :second)
-
+        csrf = get_csrf_token()
         {:ok, token, _claims} =
           Token.generate_and_sign(%{
             "users_id" => user.id,
             "role" => user.role,
+            "csrf-token" => csrf,
             "expiry" => expiry
           })
 

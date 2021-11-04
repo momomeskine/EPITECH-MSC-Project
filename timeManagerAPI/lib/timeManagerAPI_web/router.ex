@@ -28,6 +28,7 @@ defmodule TimeManagerAPIWeb.Router do
   end
 
   scope "/api", TimeManagerAPIWeb do
+   # pipe_through :protect_from_forgery
     pipe_through :authentifie
     pipe_through :api
     # connected user
@@ -40,6 +41,7 @@ defmodule TimeManagerAPIWeb.Router do
 
   # Manager
   scope "/api", TimeManagerAPIWeb do
+   # pipe_through :protect_from_forgery
     pipe_through :manager
     pipe_through :api
     pipe_through :authentifie
@@ -53,6 +55,7 @@ defmodule TimeManagerAPIWeb.Router do
 
   # General Manager
   scope "/api", TimeManagerAPIWeb do
+   # pipe_through :protect_from_forgery
     pipe_through :generalmanager
     pipe_through :api
     pipe_through :authentifie
