@@ -42,6 +42,12 @@ defmodule TimeManagerAPI.Accounts do
 
   def get_user!(id), do: Repo.get!(User, id)
 
+  def promotion_user(%User{} = user) do
+    user
+    |> User.promotion_user()
+    |> Repo.update()
+  end
+
   @doc false
   def search_user!(username, email), do: Repo.get_by!(User, username: username, email: email)
 

@@ -56,6 +56,7 @@ defmodule TimeManagerAPIWeb.Router do
     pipe_through :generalmanager
     pipe_through :api
     pipe_through :authentifie
+    put "/users/promotion/:userID", UserController, :promotion
     delete "/users/:userID", UserController, :delete
     put "/workingtimes/:id", WorkingtimeController, :update
     delete "/workingtimes/:id", WorkingtimeController, :delete

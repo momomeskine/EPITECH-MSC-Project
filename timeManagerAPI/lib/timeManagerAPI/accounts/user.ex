@@ -27,6 +27,12 @@ defmodule TimeManagerAPI.Accounts.User do
     |> put_hashed_password
   end
 
+  def promotion_user(user) do
+    user
+    |> cast(%{"role" => "manager"}, [:role])
+    |> validate_required([:role])
+  end
+
   defp put_hashed_password(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: password}} ->

@@ -84,6 +84,14 @@ defmodule TimeManagerAPIWeb.UserController do
     end
   end
 
+  def promotion(conn, %{"userID" => userID}) do
+    user = Accounts.get_user!(userID)
+
+    with {:ok, %User{} = user} <- Accounts.promotion_user(user) do
+      render(conn, "show.json", user: user)
+    end
+  end
+
   def delete(conn, %{"userID" => id}) do
     user = Accounts.get_user!(id)
 
