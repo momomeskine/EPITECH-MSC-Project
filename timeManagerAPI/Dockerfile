@@ -1,4 +1,4 @@
-FROM elixir:alpine
+FROM elixir:1.13-alpine
 #Update and install bash
 RUN apk --update --upgrade add inotify-tools bash alpine-sdk \
     && update-ca-certificates --fresh \
