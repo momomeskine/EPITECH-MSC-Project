@@ -41,14 +41,20 @@ defmodule TimeManagerAPI.WorkingtimesTest do
 
     test "update_workingtime/2 with valid data updates the workingtime" do
       workingtime = workingtime_fixture()
-      assert {:ok, %Workingtime{} = workingtime} = Workingtimes.update_workingtime(workingtime, @update_attrs)
+
+      assert {:ok, %Workingtime{} = workingtime} =
+               Workingtimes.update_workingtime(workingtime, @update_attrs)
+
       assert workingtime.end == ~N[2011-05-18 15:01:01]
       assert workingtime.start == ~N[2011-05-18 15:01:01]
     end
 
     test "update_workingtime/2 with invalid data returns error changeset" do
       workingtime = workingtime_fixture()
-      assert {:error, %Ecto.Changeset{}} = Workingtimes.update_workingtime(workingtime, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Workingtimes.update_workingtime(workingtime, @invalid_attrs)
+
       assert workingtime == Workingtimes.get_workingtime!(workingtime.id)
     end
 

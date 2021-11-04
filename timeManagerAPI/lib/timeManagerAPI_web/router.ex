@@ -5,34 +5,59 @@ defmodule TimeManagerAPIWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin do
+    plug TimeManagerAPI.Auth.Admin
+  end
+
+  pipeline :manager do
+    plug TimeManagerAPI.Auth.Manager
+  end
+
+  pipeline :generalmanager do
+    plug TimeManagerAPI.Auth.ManagerGeneral
+  end
+
+  pipeline :authentifie do
+    plug TimeManagerAPI.Auth.Authentification
+  end
 
   scope "/api", TimeManagerAPIWeb do
     pipe_through :api
-
-    scope "/users" do
-      get "/", UserController, :search
-      get "/:userID", UserController, :show
-      post "/", UserController, :create
-      post "/signin", UserController, :signin
-      put "/:userID", UserController, :update
-      delete "/:userID", UserController, :delete
-      
-    end
-
-    scope "/clocks" do
-      get "/", ClockController, :index
-      get "/:userID", ClockController, :showByUser
-      post "/:userID", ClockController, :create
-    end
-
-    scope "/workingtimes" do
-      get "/", WorkingtimeController, :index
-      get "/:id", WorkingtimeController, :search
-      # also get "/:userID?start=XXX&end=YYY"
-      post "/:userID", WorkingtimeController, :create
-      put "/:id", WorkingtimeController, :update
-      delete "/:id", WorkingtimeController, :delete
-    end
+    post "/signin", UserController, :signin
+    post "/signup", UserController, :create
   end
 
+  scope "/api", TimeManagerAPIWeb do
+    pipe_through :authentifie
+    pipe_through :api
+    # connected user
+    get "/users/logout", UserController, :logout
+    get "/users/:userID", UserController, :show
+    put "/users/:userID", UserController, :update
+    get "/clocks/:userID", ClockController, :showByUser
+    post "/clocks/:userID", ClockController, :create
+  end
+
+  # Manager
+  scope "/api", TimeManagerAPIWeb do
+    pipe_through :manager
+    pipe_through :api
+    pipe_through :authentifie
+    get "/users/", UserController, :search
+    get "/clocks/", ClockController, :index
+    post "/workingtimes/:userID", WorkingtimeController, :create
+    get "/workingtimes/", WorkingtimeController, :index
+    get "/workingtimes/:id", WorkingtimeController, :search
+    # also get "/:userID?start=XXX&end=YYY"
+  end
+
+  # General Manager
+  scope "/api", TimeManagerAPIWeb do
+    pipe_through :generalmanager
+    pipe_through :api
+    pipe_through :authentifie
+    delete "/users/:userID", UserController, :delete
+    put "/workingtimes/:id", WorkingtimeController, :update
+    delete "/workingtimes/:id", WorkingtimeController, :delete
+  end
 end

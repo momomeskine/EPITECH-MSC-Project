@@ -11,9 +11,11 @@ defmodule TimeManagerAPIWeb.WorkingtimeView do
   end
 
   def render("workingtime.json", %{workingtime: workingtime}) do
-    %{id: workingtime.id,
+    %{
+      id: workingtime.id,
       start: workingtime.start,
       end: workingtime.end,
-      userID: workingtime.user_id}
+      userID: workingtime.user_id
+    }
   end
 end

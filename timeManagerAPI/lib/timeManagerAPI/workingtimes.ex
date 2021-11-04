@@ -39,7 +39,11 @@ defmodule TimeManagerAPI.Workingtimes do
 
   @doc false
   def search_workingtime(userId, startSearch, endSearch) do
-    Repo.all(from(w in Workingtime, where: w.user_id == ^userId and ^startSearch < w.end and w.start < ^endSearch))
+    Repo.all(
+      from(w in Workingtime,
+        where: w.user_id == ^userId and ^startSearch < w.end and w.start < ^endSearch
+      )
+    )
   end
 
   @doc """

@@ -42,7 +42,8 @@ defmodule TimeManagerAPI.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:cors_plug, "~> 2.0"},
-      {:guardian, "~> 1.0"},
+      {:joken, "~> 2.0-rc0"},
+      {:poison, "~> 3.1"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"}
     ]

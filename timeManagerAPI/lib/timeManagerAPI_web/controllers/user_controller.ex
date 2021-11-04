@@ -3,7 +3,7 @@ defmodule TimeManagerAPIWeb.UserController do
 
   alias TimeManagerAPI.Accounts
   alias TimeManagerAPI.Accounts.User
-  alias TimeManagerAPIWeb.Auth.Guardian
+  alias TimeManagerAPI.Token
 
   action_fallback TimeManagerAPIWeb.FallbackController
 
@@ -13,12 +13,11 @@ defmodule TimeManagerAPIWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params),
-    {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
+    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.user_path(conn, :show, user))
-      |> render("user.json", %{user: user, token: token})
+      |> render("show.json", user: user)
     end
   end
 
@@ -30,9 +29,13 @@ defmodule TimeManagerAPIWeb.UserController do
   def search(conn, params) do
     emailSearch = Map.get(params, "email", "")
     usernameSearch = Map.get(params, "username", "")
+
     cond do
-      emailSearch != "" && usernameSearch != "" -> render(conn, "show.json", user: Accounts.search_user!(usernameSearch, emailSearch))
-      true -> render(conn, "index.json", users: Accounts.list_users())
+      emailSearch != "" && usernameSearch != "" ->
+        render(conn, "show.json", user: Accounts.search_user!(usernameSearch, emailSearch))
+
+      true ->
+        render(conn, "index.json", users: Accounts.list_users())
     end
   end
 
@@ -44,13 +47,42 @@ defmodule TimeManagerAPIWeb.UserController do
     end
   end
 
-def signin(conn, %{"email" => email, "password" => password}) do
-  with {:ok, user, token} <- Guardian.authenticate(email, password) do
-    conn
-    |> put_status(:created)
-    |> render("user.json", %{user: user, token: token})
+  def signin(conn, %{"email" => email, "password" => password}) do
+    case sign_in(email, password) do
+      {:ok, token} ->
+        conn
+        |> put_status(:ok)
+        |> send_resp(200, token)
+
+      {:error, reason} ->
+        conn
+        |> send_resp(401, reason)
+    end
   end
-end
+
+  def logout(conn, _params) do
+    put_req_header(conn, "Bearer", "")
+    send_resp(conn, :no_content, "")
+  end
+
+  def sign_in(email, password) do
+    case Comeonin.Bcrypt.check_pass(Accounts.get_by_email(email), password) do
+      {:ok, user} ->
+        expiry = DateTime.add(DateTime.utc_now(), 3600 * 24, :second)
+
+        {:ok, token, _claims} =
+          Token.generate_and_sign(%{
+            "users_id" => user.id,
+            "role" => user.role,
+            "expiry" => expiry
+          })
+
+        {:ok, token}
+
+      err ->
+        err
+    end
+  end
 
   def delete(conn, %{"userID" => id}) do
     user = Accounts.get_user!(id)

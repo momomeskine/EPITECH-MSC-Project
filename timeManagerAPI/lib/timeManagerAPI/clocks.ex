@@ -38,7 +38,8 @@ defmodule TimeManagerAPI.Clocks do
   def get_clock!(id), do: Repo.get!(Clock, id)
 
   @doc false
-  def list_user_clocks!(userID), do: Repo.all(from(clock in Clock, where: clock.user_id == ^userID))
+  def list_user_clocks!(userID),
+    do: Repo.all(from(clock in Clock, where: clock.user_id == ^userID))
 
   @doc """
   Creates a clock.

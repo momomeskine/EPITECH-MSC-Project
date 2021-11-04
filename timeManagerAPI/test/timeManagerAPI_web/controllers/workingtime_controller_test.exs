@@ -53,8 +53,13 @@ defmodule TimeManagerAPIWeb.WorkingtimeControllerTest do
   describe "update workingtime" do
     setup [:create_workingtime]
 
-    test "renders workingtime when data is valid", %{conn: conn, workingtime: %Workingtime{id: id} = workingtime} do
-      conn = put(conn, Routes.workingtime_path(conn, :update, workingtime), workingtime: @update_attrs)
+    test "renders workingtime when data is valid", %{
+      conn: conn,
+      workingtime: %Workingtime{id: id} = workingtime
+    } do
+      conn =
+        put(conn, Routes.workingtime_path(conn, :update, workingtime), workingtime: @update_attrs)
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, Routes.workingtime_path(conn, :show, id))
@@ -67,7 +72,9 @@ defmodule TimeManagerAPIWeb.WorkingtimeControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, workingtime: workingtime} do
-      conn = put(conn, Routes.workingtime_path(conn, :update, workingtime), workingtime: @invalid_attrs)
+      conn =
+        put(conn, Routes.workingtime_path(conn, :update, workingtime), workingtime: @invalid_attrs)
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end

@@ -7,11 +7,10 @@ defmodule TimeManagerAPI.Repo.Migrations.CreateUsers do
       add :username, :string, null: false
       add :encrypted_password, :string
       add :email, :string, null: false
-
+      add :role, :string
       timestamps()
     end
 
     create unique_index(:users, [:email])
-
   end
 end

@@ -10,10 +10,7 @@ defmodule TimeManagerAPIWeb.UserView do
     %{data: render_one(user, UserView, "user.json")}
   end
 
-  def render("user.json", %{user: user, token: token}) do
-    %{id: user.id,
-      username: user.username,
-      email: user.email,
-      token: token}
+  def render("user.json", %{user: user}) do
+    %{id: user.id, username: user.username, email: user.email, role: user.role}
   end
 end
